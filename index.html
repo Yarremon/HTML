@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta Wdrożenia Systemu Smart Home & Homelab | Nexus Automation</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            500: '#0284c7',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+
+        /* Gradient background animations */
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(14, 165, 233, 0.15);
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6);
+            border-radius: inherit;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+            filter: blur(8px);
+        }
+        .glow-effect:hover::before {
+            opacity: 0.6;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+
+        /* Print styles optimization */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #0f172a !important;
+            }
+            .no-print, nav, #progress-bar, .interactive-btn {
+                display: none !important;
+            }
+            .glass-card {
+                background: #ffffff !important;
+                border: 1px solid #e2e8f0 !important;
+                color: #0f172a !important;
+                box-shadow: none !important;
+            }
+            .text-slate-300, .text-slate-400 {
+                color: #475569 !important;
+            }
+            .text-white {
+                color: #0f172a !important;
+            }
+            .print-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-slate-200 antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Scroll Progress Bar -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 z-50 transition-all duration-150" style="width: 0%"></div>
+
+    <!-- Navigation Header -->
+    <nav class="fixed top-0 left-0 right-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="cpu" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-lg text-white tracking-wide block leading-none">NEXUS</span>
+                    <span class="text-xs text-cyan-400 font-medium">AUTOMATION SOLUTIONS</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 transition">O projekcie</a>
+                <a href="#modules" class="text-slate-300 hover:text-cyan-400 transition">Moduły</a>
+                <a href="#calculator" class="text-slate-300 hover:text-cyan-400 transition">Kalkulator</a>
+                <a href="#roi" class="text-slate-300 hover:text-cyan-400 transition">Estymacje & ROI</a>
+                <a href="#timeline" class="text-slate-300 hover:text-cyan-400 transition">Harmonogram</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="window.print()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-sm font-medium border border-slate-700 transition flex items-center gap-2">
+                    <i data-lucide="printer" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Drukuj / PDF</span>
+                </button>
+                <a href="#accept" class="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white text-sm font-semibold transition shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>Akceptuj</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
+
+        <!-- Hero Section -->
+        <section id="about" class="pt-8">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-20 -top-20 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-semibold tracking-wide uppercase">
+                            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                            Dedykowana Oferta Wdrożeniowa
+                        </div>
+
+                        <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                            Inteligentny Dom & Prywatny Serwer <span class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Homelab</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+                            Kompleksowa koncepcja nowoczesnej infrastruktury Smart Home opartej na bezpiecznym systemie **Home Assistant** oraz prywatnej chmurze danych. Pełna prywatność, automatyzacja procesów oraz zaawansowane zarządzanie energią.
+                        </p>
+
+                        <!-- Client Info Box -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 border-t border-slate-700/60">
+                            <div>
+                                <span class="text-xs text-slate-400 block uppercase tracking-wider">Przygotowano dla</span>
+                                <span class="text-sm font-semibold text-white">Jan Kowalski</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 block uppercase tracking-wider">Data opracowania</span>
+                                <span class="text-sm font-semibold text-white">8 Października 2026</span>
+                            </div>
+                            <div>
+                                <span class="text-xs text-slate-400 block uppercase tracking-wider">Ważność oferty</span>
+                                <span class="text-sm font-semibold text-cyan-400">14 dni</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Card -->
+                    <div class="lg:col-span-5">
+                        <div class="bg-slate-900/90 rounded-2xl p-6 border border-slate-800 space-y-4">
+                            <div class="flex justify-between items-center pb-3 border-b border-slate-800">
+                                <span class="text-sm font-medium text-slate-400">Główne założenia</span>
+                                <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">100% Local Control</span>
+                            </div>
+                            <ul class="space-y-3 text-sm text-slate-300">
+                                <li class="flex items-center gap-3">
+                                    <i data-lucide="shield-check" class="w-5 h-5 text-cyan-400 shrink-0"></i>
+                                    <span>Brak uzależnienia od chmur zewnętrznych</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i data-lucide="zap" class="w-5 h-5 text-amber-400 shrink-0"></i>
+                                    <span>Dynamiczna optymalizacja zużycia energii</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i data-lucide="lock" class="w-5 h-5 text-indigo-400 shrink-0"></i>
+                                    <span>Szyfrowane połączenie VPN (Tailscale)</span>
+                                </li>
+                                <li class="flex items-center gap-3">
+                                    <i data-lucide="refresh-cw" class="w-5 h-5 text-emerald-400 shrink-0"></i>
+                                    <span>Automatyczny backup i redundancja danych</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Metrics Section -->
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <i data-lucide="activity" class="w-8 h-8 mx-auto text-cyan-400 mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-white mb-1" id="stat-uptime">99.9%</div>
+                <div class="text-xs text-slate-400">Dostępność Systemu</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <i data-lucide="trending-down" class="w-8 h-8 mx-auto text-emerald-400 mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-white mb-1" id="stat-energy">-32%</div>
+                <div class="text-xs text-slate-400">Roczne Zużycie Energii</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <i data-lucide="sliders" class="w-8 h-8 mx-auto text-indigo-400 mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-white mb-1">50+</div>
+                <div class="text-xs text-slate-400">Zaplanowanych Automatyzacji</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl text-center">
+                <i data-lucide="clock" class="w-8 h-8 mx-auto text-amber-400 mb-2"></i>
+                <div class="text-2xl sm:text-3xl font-extrabold text-white mb-1">5 Lat</div>
+                <div class="text-xs text-slate-400">Gwarancji na Konfigurację</div>
+            </div>
+        </section>
+
+        <!-- Modules / Scope Section -->
+        <section id="modules" class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white tracking-tight">Zakres Usług & Moduły</h2>
+                    <p class="text-slate-400 text-sm mt-1">Kliknij kartę, aby zobaczyć szczegółowe elementy wybranego modułu.</p>
+                </div>
+                
+                <!-- Category Filter -->
+                <div class="flex flex-wrap gap-2 no-print">
+                    <button onclick="filterModules('all')" class="module-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500 text-white transition" data-category="all">Wszystkie</button>
+                    <button onclick="filterModules('smarthome')" class="module-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-category="smarthome">Smart Home</button>
+                    <button onclick="filterModules('homelab')" class="module-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-category="homelab">Homelab / Chmura</button>
+                    <button onclick="filterModules('security')" class="module-filter-btn px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition" data-category="security">Bezpieczeństwo</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="modules-grid">
+                
+                <!-- Card 1 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 module-card glow-effect" data-category="smarthome">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center mb-4 border border-cyan-500/20">
+                            <i data-lucide="home" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Zarządzanie Oświetleniem i Klimatem</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Strefowe sterowanie ogrzewaniem, klimatyzacją oraz adaptacyjnym oświetleniem cyrkadowym (Zigbee 3.0 / Matter).
+                        </p>
+                    </div>
+                    <details class="group text-xs border-t border-slate-700/50 pt-3">
+                        <summary class="cursor-pointer text-cyan-400 font-semibold hover:text-cyan-300 flex items-center justify-between list-none">
+                            <span>Szczegóły wdrożenia</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <ul class="mt-3 space-y-1.5 text-slate-300 list-disc list-inside">
+                            <li>Termostaty Zigbee w każdym pomieszczeniu</li>
+                            <li>Sceny oświetleniowe (Praca, Relaks, Film)</li>
+                            <li>Automatyczne wyłączanie po wyjściu z domu</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 module-card glow-effect" data-category="homelab">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center mb-4 border border-indigo-500/20">
+                            <i data-lucide="server" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Serwer Homelab Proxmox / NAS</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Cichy i energooszczędny serwer fizyczny z wirtualizacją Proxmox, chmurą Nextcloud i serwerem multimediów Plex.
+                        </p>
+                    </div>
+                    <details class="group text-xs border-t border-slate-700/50 pt-3">
+                        <summary class="cursor-pointer text-indigo-400 font-semibold hover:text-indigo-300 flex items-center justify-between list-none">
+                            <span>Szczegóły wdrożenia</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <ul class="mt-3 space-y-1.5 text-slate-300 list-disc list-inside">
+                            <li>Macierz RAID1 dla bezpieczeństwa zdjęć i dokumentów</li>
+                            <li>Automatyczny backup zarchiwizowany offsite</li>
+                            <li>Dostęp do prywatnej chmury z telefonu i PC</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 module-card glow-effect" data-category="security">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4 border border-emerald-500/20">
+                            <i data-lucide="shield" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Monitoring & Sieć Mesh Wi-Fi 6</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Bezpieczna sieć Unifi z osobnym VLAN-em dla urządzeń IoT oraz kamer z rozpoznawaniem postaci AI (Frigate).
+                        </p>
+                    </div>
+                    <details class="group text-xs border-t border-slate-700/50 pt-3">
+                        <summary class="cursor-pointer text-emerald-400 font-semibold hover:text-emerald-300 flex items-center justify-between list-none">
+                            <span>Szczegóły wdrożenia</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <ul class="mt-3 space-y-1.5 text-slate-300 list-disc list-inside">
+                            <li>Kamy PoE AI z retencją nagrań do 30 dni</li>
+                            <li>Izolacja sieci Smart Home od sieci prywatnej</li>
+                            <li>Ochrona przed reklamami w całej sieci (AdGuard Home)</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 module-card glow-effect" data-category="smarthome">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center mb-4 border border-amber-500/20">
+                            <i data-lucide="battery-charging" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Integracja Fotowoltaiki & Magazynu</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Inteligentne bilansowanie energii - ładowanie auta i uruchamianie urządzeń w dołkach cenowych prądu.
+                        </p>
+                    </div>
+                    <details class="group text-xs border-t border-slate-700/50 pt-3">
+                        <summary class="cursor-pointer text-amber-400 font-semibold hover:text-amber-300 flex items-center justify-between list-none">
+                            <span>Szczegóły wdrożenia</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <ul class="mt-3 space-y-1.5 text-slate-300 list-disc list-inside">
+                            <li>Prognozowanie produkcji na podstawie pogody</li>
+                            <li>Automatyczne załączanie pompy ciepła / klimatyzacji</li>
+                            <li>Dynamiczne taryfy spotowe giełdy energii</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 module-card glow-effect" data-category="homelab">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center mb-4 border border-rose-500/20">
+                            <i data-lucide="tablet" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Centralny Panel Ścienny (Wall Panel)</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Montaż tabletu 10" z dedykowanym interfejsem Fully Kiosk Browser na ścianie w strefie dziennej.
+                        </p>
+                    </div>
+                    <details class="group text-xs border-t border-slate-700/50 pt-3">
+                        <summary class="cursor-pointer text-rose-400 font-semibold hover:text-rose-300 flex items-center justify-between list-none">
+                            <span>Szczegóły wdrożenia</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <ul class="mt-3 space-y-1.5 text-slate-300 list-disc list-inside">
+                            <li>Dedykowana ramka drukowana w 3D z ładowaniem flush</li>
+                            <li>Automatyczne wybudzanie na podstawie czujnika ruchu</li>
+                            <li>Szybki podgląd kamer i stanu rolet/zamków</li>
+                        </ul>
+                    </details>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="glass-card rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 module-card glow-effect" data-category="security">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center mb-4 border border-purple-500/20">
+                            <i data-lucide="life-buoy" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Szkolenie & Wsparcie 12m+</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Pełna dokumentacja systemu, personalne szkolenie dla domowników oraz priorytetowe wsparcie techniczne.
+                        </p>
+                    </div>
+                    <details class="group text-xs border-t border-slate-700/50 pt-3">
+                        <summary class="cursor-pointer text-purple-400 font-semibold hover:text-purple-300 flex items-center justify-between list-none">
+                            <span>Szczegóły wdrożenia</span>
+                            <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-open:rotate-180"></i>
+                        </summary>
+                        <ul class="mt-3 space-y-1.5 text-slate-300 list-disc list-inside">
+                            <li>Książka serwisowa i schematy połączeń</li>
+                            <li>Zdalna diagnostyka bez naruszania prywatności</li>
+                            <li>Aktualizacje oprogramowania w cenie</li>
+                        </ul>
+                    </details>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Interactive Price Calculator Section -->
+        <section id="calculator" class="glass-card rounded-3xl p-8 sm:p-10 border border-slate-800 relative">
+            <div class="max-w-3xl mx-auto space-y-8">
+                <div class="text-center space-y-2">
+                    <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest">Elastyczny Budżet</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold text-white">Interaktywny Kalkulator Kosztów</h2>
+                    <p class="text-slate-400 text-sm">Dostosuj parametry wdrożenia, aby natychmiast poznać szacowany koszt końcowy.</p>
+                </div>
+
+                <div class="space-y-6 bg-slate-900/60 p-6 rounded-2xl border border-slate-800/80">
+                    
+                    <!-- Slider 1: Powierzchnia -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm font-medium">
+                            <label for="area-range" class="text-slate-300">Powierzchnia domu / mieszkania:</label>
+                            <span class="text-cyan-400 font-bold"><span id="area-val">120</span> m²</span>
+                        </div>
+                        <input type="range" id="area-range" min="40" max="300" step="10" value="120" 
+                            class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500">
+                    </div>
+
+                    <!-- Checkbox options -->
+                    <div class="pt-4 space-y-3">
+                        <span class="text-xs font-bold uppercase text-slate-400 tracking-wider block">Opcjonalne moduły rozszerzone:</span>
+                        
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-800/50 hover:bg-slate-800 cursor-pointer border border-slate-700/50 transition">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-homelab" checked class="w-4 h-4 rounded text-cyan-500 focus:ring-cyan-500 bg-slate-900 border-slate-700">
+                                <div>
+                                    <div class="text-sm font-semibold text-white">Serwer Homelab + NAS Proxmox</div>
+                                    <div class="text-xs text-slate-400">Prywatna chmura, dyski 2x4TB RAID, Home Assistant Supervised</div>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-300">+3,500 PLN</span>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-800/50 hover:bg-slate-800 cursor-pointer border border-slate-700/50 transition">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-cameras" checked class="w-4 h-4 rounded text-cyan-500 focus:ring-cyan-500 bg-slate-900 border-slate-700">
+                                <div>
+                                    <div class="text-sm font-semibold text-white">System Monitoringu AI (4x Kamera PoE)</div>
+                                    <div class="text-xs text-slate-400">Detekcja osób/pojazdów, wyzwalanie alarmu w HA</div>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-300">+2,800 PLN</span>
+                        </label>
+
+                        <label class="flex items-center justify-between p-3 rounded-xl bg-slate-800/50 hover:bg-slate-800 cursor-pointer border border-slate-700/50 transition">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="opt-panel" class="w-4 h-4 rounded text-cyan-500 focus:ring-cyan-500 bg-slate-900 border-slate-700">
+                                <div>
+                                    <div class="text-sm font-semibold text-white">Ścienny Panel Dotykowy 10" z montażem</div>
+                                    <div class="text-xs text-slate-400">Dedykowany wyświetlacz w holu lub salonie</div>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-slate-300">+1,200 PLN</span>
+                        </label>
+                    </div>
+
+                    <!-- Total Price Display -->
+                    <div class="pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+                        <div>
+                            <span class="text-xs text-slate-400 uppercase tracking-wider block">Szacowana kwota netto</span>
+                            <div class="text-3xl sm:text-4xl font-extrabold text-white">
+                                <span id="total-price">0</span> <span class="text-lg text-cyan-400 font-normal">PLN</span>
+                            </div>
+                        </div>
+                        <a href="#accept" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-center transition shadow-lg shadow-cyan-500/25">
+                            Zatwierdź tę konfigurację
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROI / Energy Chart Section -->
+        <section id="roi" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div class="lg:col-span-5 space-y-4">
+                <div class="inline-flex items-center gap-2 text-xs font-bold text-emerald-400 uppercase tracking-wider">
+                    <i data-lucide="piggy-bank" class="w-4 h-4"></i> Zwrot z Inwestycji
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white leading-tight">
+                    Oszczędność energii i redukcja rachunków
+                </h2>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Dzięki adaptacyjnym algorytmom sterowania ogrzewaniem, integracji z fotowoltaiką oraz eliminacji poboru prądu w trybie "Standby", system spłaca się średnio w ciągu 3-5 lat użytkowania.
+                </p>
+                
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-center justify-between text-xs sm:text-sm p-3 rounded-lg bg-slate-900/60 border border-slate-800">
+                        <span class="text-slate-300">Szacowana roczna oszczędność prądu:</span>
+                        <span class="font-bold text-emerald-400">~ 2,400 PLN</span>
+                    </div>
+                    <div class="flex items-center justify-between text-xs sm:text-sm p-3 rounded-lg bg-slate-900/60 border border-slate-800">
+                        <span class="text-slate-300">Oszczędność na ogrzewaniu (strefy):</span>
+                        <span class="font-bold text-emerald-400">~ 22% / rok</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chart Container -->
+            <div class="lg:col-span-7 glass-card p-6 rounded-3xl border border-slate-800">
+                <div class="text-xs font-semibold text-slate-400 mb-4 flex justify-between items-center">
+                    <span>Prognozowane koszty energii w czasie (PLN)</span>
+                    <span class="text-cyan-400">5-letni Horyzont</span>
+                </div>
+                <div class="h-64 sm:h-80 relative">
+                    <canvas id="roiChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="space-y-8">
+            <div class="text-center space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-bold text-white">Harmonogram Wdrożenia</h2>
+                <p class="text-slate-400 text-sm">Przejrzysty, 4-etapowy proces realizacji Twojego projektu.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+                
+                <!-- Step 1 -->
+                <div class="glass-card p-6 rounded-2xl relative flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-cyan-500 text-white font-bold flex items-center justify-center text-sm mb-4">1</div>
+                        <h3 class="font-bold text-white text-base mb-1">Audyt & Prefabrykacja</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Analiza instalacji, programowanie urządzeń w laboratorium i przygotowanie serwera Homelab przed montażem.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-xs font-semibold text-cyan-400">Tydzień 1</div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="glass-card p-6 rounded-2xl relative flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-bold flex items-center justify-center text-sm mb-4 border border-slate-700">2</div>
+                        <h3 class="font-bold text-white text-base mb-1">Montaż & Sieć</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Instalacja gateway'ów Zigbee, punktów Wi-Fi Mesh, sensorów oraz podłączenie serwera w szafie RACK.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-xs font-semibold text-slate-400">Tydzień 2</div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="glass-card p-6 rounded-2xl relative flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-bold flex items-center justify-center text-sm mb-4 border border-slate-700">3</div>
+                        <h3 class="font-bold text-white text-base mb-1">Automatyzacje</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Konfiguracja scen, integracja fotowoltaiki, powiadomień na telefony oraz zabezpieczeń sieciowych.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-xs font-semibold text-slate-400">Tydzień 3</div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="glass-card p-6 rounded-2xl relative flex flex-col justify-between">
+                    <div>
+                        <div class="w-8 h-8 rounded-full bg-slate-800 text-slate-300 font-bold flex items-center justify-center text-sm mb-4 border border-slate-700">4</div>
+                        <h3 class="font-bold text-white text-base mb-1">Szkolenie & Odbiór</h3>
+                        <p class="text-slate-400 text-xs leading-relaxed">
+                            Przekazanie dostępu, instruktaż dla domowników, przekazanie dokumentacji i uruchomienie gwarancji.
+                        </p>
+                    </div>
+                    <div class="mt-4 text-xs font-semibold text-emerald-400">Finał</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Final Acceptance Section -->
+        <section id="accept" class="glass-card rounded-3xl p-8 sm:p-12 border border-cyan-500/30 text-center space-y-6">
+            <div class="max-w-2xl mx-auto space-y-4">
+                <div class="w-16 h-16 rounded-full bg-cyan-500/10 text-cyan-400 flex items-center justify-center mx-auto border border-cyan-500/30">
+                    <i data-lucide="file-check-2" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white">Gotowy na inteligentny dom?</h2>
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Kliknięcie ponizszego przycisku spowoduje przesłanie akceptacji warunków oferty do opiekuna Twojego projektu. Możesz również zapisać tę ofertę do pliku PDF.
+                </p>
+
+                <div id="approval-status" class="hidden p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-sm font-semibold">
+                    <i data-lucide="check-circle-2" class="w-5 h-5 inline mr-2"></i> Oferta została pomyślnie zaakceptowana! Skontaktujemy się w ciągu 24h.
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 pt-4 no-print" id="action-buttons">
+                    <button onclick="acceptOffer()" class="px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-lg transition shadow-xl shadow-cyan-500/30 flex items-center justify-center gap-2">
+                        <i data-lucide="check" class="w-5 h-5"></i>
+                        <span>Akceptuję Ofertę</span>
+                    </button>
+                    <button onclick="window.print()" class="px-6 py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold transition border border-slate-700 flex items-center justify-center gap-2">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        <span>Pobierz jako PDF</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-8 text-center text-xs text-slate-500">
+        <p>© 2026 Nexus Automation Solutions. Wszelkie prawa zastrzeżone.</p>
+        <p class="mt-1">Dokument wygenerowany jako interaktywny raport HTML.</p>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // 1. Scroll Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + '%';
+        });
+
+        // 2. Interactive Calculator Logic
+        const baseCostPerM2 = 45; // Base price per m2
+        const areaRange = document.getElementById('area-range');
+        const areaVal = document.getElementById('area-val');
+        const optHomelab = document.getElementById('opt-homelab');
+        const optCameras = document.getElementById('opt-cameras');
+        const optPanel = document.getElementById('opt-panel');
+        const totalPriceEl = document.getElementById('total-price');
+
+        function calculateTotal() {
+            const area = parseInt(areaRange.value);
+            areaVal.innerText = area;
+
+            let total = area * baseCostPerM2 + 2500; // base system cost
+
+            if (optHomelab.checked) total += 3500;
+            if (optCameras.checked) total += 2800;
+            if (optPanel.checked) total += 1200;
+
+            // Animate counter transition
+            totalPriceEl.innerText = total.toLocaleString('pl-PL');
+        }
+
+        areaRange.addEventListener('input', calculateTotal);
+        optHomelab.addEventListener('change', calculateTotal);
+        optCameras.addEventListener('change', calculateTotal);
+        optPanel.addEventListener('change', calculateTotal);
+
+        // Initial Calculation
+        calculateTotal();
+
+        // 3. Module Filter Logic
+        function filterModules(category) {
+            const cards = document.querySelectorAll('.module-card');
+            const buttons = document.querySelectorAll('.module-filter-btn');
+
+            buttons.forEach(btn => {
+                if (btn.getAttribute('data-category') === category) {
+                    btn.classList.remove('bg-slate-800', 'text-slate-300');
+                    btn.classList.add('bg-cyan-500', 'text-white');
+                } else {
+                    btn.classList.remove('bg-cyan-500', 'text-white');
+                    btn.classList.add('bg-slate-800', 'text-slate-300');
+                }
+            });
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 4. Offer Acceptance Interaction
+        function acceptOffer() {
+            document.getElementById('action-buttons').classList.add('hidden');
+            document.getElementById('approval-status').classList.remove('hidden');
+        }
+
+        // 5. Render Chart.js ROI Graph
+        const ctx = document.getElementById('roiChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Rok 1', 'Rok 2', 'Rok 3', 'Rok 4', 'Rok 5'],
+                datasets: [
+                    {
+                        label: 'Standardowy Dom (bez automatyzacji)',
+                        data: [7200, 15100, 23800, 33200, 43500],
+                        borderColor: '#ef4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        borderDash: [5, 5],
+                        fill: false,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Z systemem Smart Home Nexus',
+                        data: [4800, 9900, 15200, 20800, 26700],
+                        borderColor: '#10b981',
+                        backgroundColor: 'rgba(16, 185, 129, 0.15)',
+                        fill: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#94a3b8',
+                            font: { family: 'Plus Jakarta Sans', size: 11 }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#94a3b8' }
+                    },
+                    y: {
+                        grid: { color: 'rgba(255,255,255,0.05)' },
+                        ticks: { color: '#94a3b8' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
